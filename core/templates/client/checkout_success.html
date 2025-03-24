@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Успешная оплата{% endblock %}
+{% block content %}
+<h2>✅ Заказ оплачен</h2>
+<p>Спасибо за ваш заказ!</p>
+<a href="{% url 'client_dashboard' %}">Вернуться на главную</a>
+{% endblock %}

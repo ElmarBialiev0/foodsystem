@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Кладовщик{% endblock %}
+{% block header %}Панель кладовщика{% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{% url 'stockman_ingredients' %}">Складские остатки</a></li>
+    <li><a href="{% url 'stockman_transactions' %}">История движений</a></li>
+    <li><a href="{% url 'stockman_add_transaction' %}">Добавить операцию</a></li>
+</ul>
+{% endblock %}

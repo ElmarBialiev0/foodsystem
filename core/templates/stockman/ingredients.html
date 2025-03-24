@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Склад{% endblock %}
+{% block header %}Складские остатки{% endblock %}
+
+
+{% block content %}
+<p><a href="{% url 'stockman_add_ingredient' %}">➕ Добавить ингредиент</a></p>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Количество</th>
+        <th>Ед. изм.</th>
+    </tr>
+    {% for ing in ingredients %}
+    <tr>
+        <td>{{ ing.name }}</td>
+        <td>{{ ing.quantity }}</td>
+        <td>{{ ing.unit }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Панель повара{% endblock %}
+{% block header %}Добро пожаловать, {{ user.username }} (Повар){% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{% url 'cook_menu_list' %}">Формирование меню</a></li>
+    <li><a href="{% url 'cook_recipe_list' %}">База рецептов</a></li>
+</ul>
+{% endblock %}

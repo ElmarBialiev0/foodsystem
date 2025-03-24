@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Клиент{% endblock %}
+{% block header %}Добро пожаловать, {{ user.username }}!{% endblock %}
+
+{% block content %}
+<h2>Доступные действия:</h2>
+<ul>
+    <li><a href="{% url 'client_menu' %}"> Посмотреть меню на сегодня</a></li>
+    <li><a href="{% url 'view_cart' %}"> Корзина</a></li>
+    <li><a href="{% url 'client_order_history' %}"> История заказов</a></li>
+</ul>
+{% endblock %}

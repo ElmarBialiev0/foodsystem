@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}История заказов{% endblock %}
+{% block header %}🧾 История заказов{% endblock %}
+{% block content %}
+
+<h2>Ваши заказы</h2>
+
+{% if orders %}
+    <table>
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Оплачен</th>
+                <th>Состав заказа</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>{{ order.get_status_display }}</td>
+                    <td>
+                        {% if order.paid %}
+                            ✅
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    </td>
+                    <td>
+                        <ul>
+                            {% for item in order.items.all %}
+                                <li>{{ item.menu_item.recipe.name }} × {{ item.quantity }}</li>
+                            {% empty %}
+                                <li>Пусто</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>У вас пока нет заказов.</p>
+{% endif %}
+
+{% endblock %}

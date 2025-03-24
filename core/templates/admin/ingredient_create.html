@@ -1,0 +1,18 @@
+<!-- core/templates/admin/ingredient_create.html -->
+{% extends "base.html" %}
+{% block title %}Добавить ингредиент{% endblock %}
+{% block content %}
+  <h2>Добавить новый ингредиент</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Добавить ингредиент</button>
+  </form>
+  {% if form.errors %}
+    <div style="color: red;">
+      {% for error in form.errors %}
+        <p>{{ error }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endblock %}

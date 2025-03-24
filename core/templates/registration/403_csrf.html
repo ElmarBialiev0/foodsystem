@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Ошибка безопасности{% endblock %}
+{% block header %}⛔ CSRF-проверка не пройдена{% endblock %}
+
+{% block content %}
+<p>Срок действия страницы истёк или форма отправлена неправильно.</p>
+<p>Попробуйте <a href="javascript:location.reload()">обновить страницу</a> и повторить попытку.</p>
+{% endblock %}

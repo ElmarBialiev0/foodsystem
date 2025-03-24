@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Меню{% endblock %}
+{% block header %}Меню на неделю{% endblock %}
+
+{% block content %}
+<form method="get" style="margin-bottom: 1rem;">
+    <input type="text" name="q" placeholder="Поиск по блюду..." value="{{ query }}">
+    <input type="date" name="date" value="{{ date_filter }}">
+    <button type="submit">🔍 Найти</button>
+</form>
+<a href="{% url 'admin_menu_create' %}">+ Сформировать новое меню</a>
+<table>
+    <tr>
+        <th>Блюдо</th>
+        <th>Дата</th>
+        <th>Цена</th>
+        <th>Действия</th>
+    </tr>
+    {% for item in menu_items %}
+    <tr>
+        <td>{{ item.recipe.name }}</td>
+        <td>{{ item.date_available }}</td>
+        <td>{{ item.price }} ₽</td>
+        <td>
+            <a href="{% url 'admin_menu_update' item.id %}">Редактировать</a> |
+            <a href="{% url 'admin_menu_delete' item.id %}">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

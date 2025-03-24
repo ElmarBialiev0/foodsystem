@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Отчёты{% endblock %}
+{% block header %}📊 Аналитика и отчёты{% endblock %}
+
+{% block content %}
+
+<section>
+    <h2>Продажи за период</h2>
+    <form method="get" style="margin-bottom: 1rem;">
+        <label for="period">Период:</label>
+        <select name="period" id="period">
+            <option value="day" {% if period == 'day' %}selected{% endif %}>День</option>
+            <option value="week" {% if period == 'week' %}selected{% endif %}>Неделя</option>
+            <option value="month" {% if period == 'month' %}selected{% endif %}>Месяц</option>
+            <option value="year" {% if period == 'year' %}selected{% endif %}>Год</option>
+        </select>
+        <button type="submit">Показать</button>
+    </form>
+
+    <p><strong>💰 Суммарная выручка:</strong> {{ total_income }} ₽</p>
+
+    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+        <form method="get" action="{% url 'admin_report_pdf' %}">
+            <input type="hidden" name="period" value="{{ period }}">
+            <button type="submit">📄 Скачать PDF</button>
+        </form>
+        <form method="get" action="{% url 'admin_stock_excel' %}">
+            <button type="submit">📊 Скачать Excel (остатки склада)</button>
+        </form>
+    </div>
+</section>
+
+<hr>
+
+<section style="margin-top: 2rem;">
+    <h2>🍽️ Популярные блюда</h2>
+    {% if popular_items %}
+    <table>
+        <thead>
+            <tr>
+                <th>Блюдо</th>
+                <th>Продано</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in popular_items %}
+            <tr>
+                <td>{{ row.name }}</td>
+                <td>{{ row.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Нет данных за выбранный период.</p>
+    {% endif %}
+</section>
+
+<hr>
+
+<section style="margin-top: 2rem;">
+    <h2>📦 Остатки на складе</h2>
+    {% if ingredients %}
+    <table>
+        <thead>
+            <tr>
+                <th>Ингредиент</th>
+                <th>Количество</th>
+                <th>Ед. изм.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ing in ingredients %}
+            <tr>
+                <td>{{ ing.name }}</td>
+                <td>{{ ing.quantity }}</td>
+                <td>{{ ing.unit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Склад пуст.</p>
+    {% endif %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+<!-- templates/client/yookassa_form.html -->
+{% extends "base.html" %}
+{% block title %}Оплата{% endblock %}
+{% block header %}Имитация оплаты YooKassa{% endblock %}
+
+{% block content %}
+<h2>Оплата заказа №{{ order_id }}</h2>
+<p>Сумма: {{ amount }} ₽</p>
+
+<form method="post" action="{% url 'yookassa_success' %}">
+    {% csrf_token %}
+    <input type="hidden" name="order_id" value="{{ order_id }}">
+    <button type="submit">Оплатить (имитация)</button>
+</form>
+{% endblock %}

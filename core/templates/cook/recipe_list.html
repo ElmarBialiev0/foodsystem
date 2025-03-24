@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Рецепты{% endblock %}
+{% block header %}База рецептов{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Выход</th>
+        <th>Описание</th>
+    </tr>
+    {% for recipe in recipes %}
+    <tr>
+        <td>{{ recipe.name }}</td>
+        <td>{{ recipe.output_weight }} г</td>
+        <td>{{ recipe.description }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Технические карты{% endblock %}
+{% block header %}Технические карты (Рецепты){% endblock %}
+
+{% block content %}
+<form method="get" style="margin-bottom: 1rem;">
+    <input type="text" name="q" placeholder="Поиск по названию рецепта..." value="{{ query }}">
+    <button type="submit">🔍 Найти</button>
+</form>
+
+<a href="{% url 'admin_recipe_create' %}">+ Добавить рецепт</a>
+<table>
+    <tr>
+        <th>Название</th>
+        <th>Выход (г)</th>
+        <th>Действия</th>
+    </tr>
+    {% for recipe in recipes %}
+    <tr>
+        <td>{{ recipe.name }}</td>
+        <td>{{ recipe.output_weight }}</td>
+        <td>
+            <a href="{% url 'admin_recipe_update' recipe.id %}">Редактировать</a> |
+            <a href="{% url 'admin_recipe_delete' recipe.id %}">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Добавить операцию{% endblock %}
+{% block header %}Операция со складом{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Меню{% endblock %}
+{% block header %}Меню на сегодня{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Блюдо</th>
+        <th>Описание</th>
+        <th>Цена</th>
+        <th>Действие</th>
+    </tr>
+    {% for item in menu_items %}
+    <tr>
+        <td>{{ item.recipe.name }}</td>
+        <td>{{ item.recipe.description }}</td>
+        <td>{{ item.price }} ₽</td>
+        <td>
+            <form method="post" action="{% url 'add_to_cart' item.id %}">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="1" min="1">
+                <button type="submit">Добавить</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'view_cart' %}">Перейти в корзину</a>
+{% endblock %}

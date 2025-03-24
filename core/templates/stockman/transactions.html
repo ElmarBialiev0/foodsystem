@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}История операций{% endblock %}
+{% block header %}История приходов и списаний{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Дата</th>
+        <th>Ингредиент</th>
+        <th>Тип</th>
+        <th>Количество</th>
+        <th>Комментарий</th>
+    </tr>
+    {% for tx in transactions %}
+    <tr>
+        <td>{{ tx.created_at }}</td>
+        <td>{{ tx.ingredient.name }}</td>
+        <td>{{ tx.get_type_display }}</td>
+        <td>{{ tx.quantity }}</td>
+        <td>{{ tx.comment }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

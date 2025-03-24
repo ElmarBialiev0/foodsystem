@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Админ-панель{% endblock %}
+{% block header %}Административная панель{% endblock %}
+{% block content %}
+<h2>📊 Общая статистика</h2>
+<ul>
+    <li>Пользователей: {{ stats.total_users }} (Админов: {{ stats.admins }}, Поваров: {{ stats.cooks }}, Кладовщиков: {{ stats.stockmen }}, Клиентов: {{ stats.clients }})</li>
+    <li>Всего заказов: {{ stats.total_orders }} | Сегодня: {{ stats.today_orders }}</li>
+    <li>Общая выручка: {{ stats.total_income }} ₽</li>
+</ul>
+
+<h2>🛒 Последние заказы</h2>
+<ul>
+    {% for order in latest_orders %}
+        <li>Заказ #{{ order.id }} — {{ order.created_at|date:"d.m.Y H:i" }} — {{ order.client.username }} — Статус: {{ order.get_status_display }}</li>
+    {% empty %}
+        <li>Нет заказов</li>
+    {% endfor %}
+</ul>
+<h2>📊 Пользователи по ролям</h2>
+<img src="data:image/png;base64,{{ chart }}" alt="Диаграмма пользователей">
+
+<h2>📦 Последние операции со складом</h2>
+<ul>
+    {% for tx in latest_transactions %}
+        <li>{{ tx.created_at|date:"d.m.Y H:i" }} — {{ tx.ingredient.name }} — {{ tx.get_type_display }} — {{ tx.quantity }} {{ tx.ingredient.unit }}</li>
+    {% empty %}
+        <li>Нет движений</li>
+    {% endfor %}
+</ul>
+{% endblock %}
